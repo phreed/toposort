@@ -1,0 +1,36 @@
+{
+  "name": "toposort",
+  "version": "1.0.0",
+  "description": "Topological sort in JavaScript",
+  "main": "index.js",
+  "scripts": {
+    "dev-test-watch": "mocha-typescript-watch",
+    "test": "tsc -p . && mocha",
+    "prepublish": "tsc -p ."
+  },
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/phreed/toposort",
+  "author": "Fred Eisele (https://github.com/phreed)",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/phreed/toposort.git"
+  },
+  "bugs": {
+    "url": "https://github.com/phreed/toposort/issues"
+  },
+  "engines": {
+    "node": ">= 6.5.0",
+    "npm": ">= 3.10.3"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/core-js": "^0.9.34",
+    "@types/node": "^6.0.46",
+    "core-js": "^2.4.1",
+    "mocha": "^3.1.2",
+    "mocha-typescript": "^1.0.11",
+    "node": "0.0.0",
+    "nodejs": "0.0.0",
+    "typescript": "^2.0.9"
+  }
+}
