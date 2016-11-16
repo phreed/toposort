@@ -8,7 +8,9 @@ provide a topological sort of the items.
 
 ## Usage
 
-`toposort` expects an array of arrays. The inner arrays are typically two items each. For example, lets review this simplest example:
+`toposort` expects an array of adjacency nodes. 
+The form of these adjacency nodes can be of many types.
+For example, lets review this simplest example:
 
 ```ts
 import {Toposort} from "toposort";

@@ -8,13 +8,13 @@
     "declaration": true
   },
   "include": [
-    "./lib/**/*.ts"
+    "./lib/**/*.ts",
+    "./test/**/*.ts"
   ],
   "exclude": [
     "node_modules",
     "bower_components",
     "jspm_packages",
-    "**/*.spec.ts",
     ".vscode"
   ]
 }
