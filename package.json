@@ -2,7 +2,8 @@
   "name": "toposort",
   "version": "1.0.0",
   "description": "Topological sort in JavaScript",
-  "main": "index.js",
+  "main": "lib/toposort.js",
+  "typings": "lib/toposort.d.ts",
   "scripts": {
     "dev-test-watch": "mocha-typescript-watch",
     "test": "tsc -p . && mocha --opts mocha.opts ",
@@ -23,12 +24,9 @@
     "node": ">= 6.5.0",
     "npm": ">= 3.10.3"
   },
-  "dependencies": {
-    "chai-deep-match": "^1.0.2"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@types/chai": "^3.4.34",
-    "@types/chai-deep-match": "github:phreed/ts-typings#chai-deep-match",
     "@types/core-js": "^0.9.34",
     "@types/node": "^6.0.48",
     "chai": "^3.5.0",
