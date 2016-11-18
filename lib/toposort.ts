@@ -21,8 +21,10 @@ export interface NodeMethods<T> {
     /**
      * The keyFn returns a key when passed a node.
      * an example for buildin a key given a number.
+     * If the node should be dropped from the adjacency
+     * list then undefined in returned.
      */
-    keyFn<T>(node: T): string;
+    keyFn<T>(node: T): string | null;
     /**
      * The depsFn returns the keys for a set of dependencies for a node.
      * an example for indexing a list of numbers paired with an array of depencencies.
@@ -67,6 +69,9 @@ export function ConstructAdjacencyList<T>(list: T[], methods: NodeMethods<T>): A
     let lookup = new Map<string, AdjacencyNode<T>>();
     list.forEach((node: T) => {
         let key = methods.keyFn(node);
+        if (key === "null") {
+            return;
+        }
         if (lookup.has(key)) {
             lookup.get(key).append(node);
         } else {

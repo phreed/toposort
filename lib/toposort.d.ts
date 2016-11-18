@@ -12,8 +12,10 @@ export interface NodeMethods<T> {
     /**
      * The keyFn returns a key when passed a node.
      * an example for buildin a key given a number.
+     * If the node should be dropped from the adjacency
+     * list then undefined in returned.
      */
-    keyFn<T>(node: T): string;
+    keyFn<T>(node: T): string | null;
     /**
      * The depsFn returns the keys for a set of dependencies for a node.
      * an example for indexing a list of numbers paired with an array of depencencies.
