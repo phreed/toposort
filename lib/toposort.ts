@@ -9,26 +9,44 @@ export enum Mark {
     PERMANENT = 2
 }
 
-export interface NodeMethods<T> {
+export class NodeMethods<T> {
     /**
      * Constuct a node given only the key.
      * Something like the inverse of keyFn.
      */
-    nullNode(key: string): T;
+    nullNode(key: string): T | null {
+        return null;
+    }
     /**
      * The keyFn returns a key when passed a node.
      * an example for buildin a key given a number.
      * If the node should be dropped from the adjacency
      * list then undefined in returned.
      */
-    keyFn<T>(node: T): string | null;
+    keyFn<T>(node: T): string | null {
+        return null;
+    }
     /**
      * The depsFn returns the keys for a set of dependencies for a node.
-     * an example for indexing a list of numbers paired with an array of depencencies.
+     * An example for indexing a list of numbers 
+     * paired with an array of depencencies.
      */
-    depsFn(node: T): string[];
+    depsFn(node: T): string[] {
+        return [];
+    }
+    /**
+     * The depsFn returns the keys for a set of dependencies for a node.
+     */
+    predsFn(node: T): string[] {
+        return [];
+    }
 
-    cycleFn(node: T): void;
+    /**
+     * This function is called when a cyclic dependency is located.
+     * Generally you will want to save off the 
+     * offending node for special processing.
+     */
+    cycleFn(node: T): void { }
 }
 
 export class AdjacencyNode<T> {
@@ -77,17 +95,30 @@ export function ConstructAdjacencyList<T>(list: T[], methods: NodeMethods<T>): A
     })
     // Populate the dependancy array for each adjacency node.
     lookup.forEach((value) => {
-        for (let depnode of value.node) {
-            for (let depkey of methods.depsFn(depnode)) {
-                let deprec = lookup.get(depkey);
-                if (typeof deprec === "undefined") {
-                    deprec = new AdjacencyNode<T>(methods.nullNode(depkey));
-                    lookup.set(depkey, deprec);
+        for (let pivotNode of value.node) {
+            for (let depKey of methods.depsFn(pivotNode)) {
+                if (depKey === null) {
+                    return;
+                }
+                let depRec = lookup.get(depKey);
+                if (typeof depRec === "undefined") {
+                    depRec = new AdjacencyNode<T>(methods.nullNode(depKey));
+                    lookup.set(depKey, depRec);
                 }
                 // the dependency portion
-                value.dep.push(deprec);
-                // the predecessor
-                // deprec.dep.push(value);
+                value.dep.push(depRec);
+            }
+            for (let predKey of methods.predsFn(pivotNode)) {
+                if (predKey === null) {
+                    return;
+                }
+                let predRec = lookup.get(predKey);
+                if (typeof predRec === "undefined") {
+                    predRec = new AdjacencyNode<T>(methods.nullNode(predKey));
+                    lookup.set(predKey, predRec);
+                }
+                // the predecessor portion
+                predRec.dep.push(value);
             }
         }
     })

@@ -3,12 +3,12 @@ export declare enum Mark {
     TEMPORARY = 1,
     PERMANENT = 2,
 }
-export interface NodeMethods<T> {
+export declare class NodeMethods<T> {
     /**
      * Constuct a node given only the key.
      * Something like the inverse of keyFn.
      */
-    nullNode(key: string): T;
+    nullNode(key: string): T | null;
     /**
      * The keyFn returns a key when passed a node.
      * an example for buildin a key given a number.
@@ -18,9 +18,19 @@ export interface NodeMethods<T> {
     keyFn<T>(node: T): string | null;
     /**
      * The depsFn returns the keys for a set of dependencies for a node.
-     * an example for indexing a list of numbers paired with an array of depencencies.
+     * An example for indexing a list of numbers
+     * paired with an array of depencencies.
      */
     depsFn(node: T): string[];
+    /**
+     * The depsFn returns the keys for a set of dependencies for a node.
+     */
+    predsFn(node: T): string[];
+    /**
+     * This function is called when a cyclic dependency is located.
+     * Generally you will want to save off the
+     * offending node for special processing.
+     */
     cycleFn(node: T): void;
 }
 export declare class AdjacencyNode<T> {

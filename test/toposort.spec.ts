@@ -13,9 +13,12 @@ function keyRawFn<T>(node: T[]): T {
     return node[0];
 }
 
-class NumAMethods implements NodeMethods<number[]> {
+class NumAMethods extends NodeMethods<number[]> {
     public cycles: number[][];
-    constructor() { this.cycles = []; }
+    constructor() {
+        super();
+        this.cycles = [];
+    }
     cycleFn(nodeKey: number[]): void {
         this.cycles.push(nodeKey);
         return;
@@ -37,9 +40,12 @@ class NumAThrowMethods extends NumAMethods {
 }
 
 
-class StrAMethods implements NodeMethods<string[]> {
+class StrAMethods extends NodeMethods<string[]> {
     public cycles: string[][];
-    constructor() { this.cycles = []; }
+    constructor() {
+        super();
+        this.cycles = [];
+    }
     cycleFn(nodeKey: string[]): void {
         this.cycles.push(nodeKey);
         return;
