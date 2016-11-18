@@ -3,9 +3,6 @@
 *
 */
 
-/// <reference types="node" />
-/// <reference types="core-js" />
-
 export enum Mark {
     UNMARKED = 0,
     TEMPORARY = 1,

@@ -23,7 +23,7 @@ class NumAMethods implements NodeMethods<number[]> {
     nullNode(key: string): number[] {
         return [Number(key)];
     }
-    keyFn(node: number[]): string {
+    keyFn(node: number[]): string | null {
         return node[0].toString();
     }
     depsFn(node: number[]): string[] {
@@ -47,7 +47,7 @@ class StrAMethods implements NodeMethods<string[]> {
     nullNode(key: string): string[] {
         return [key];
     }
-    keyFn(node: string[]): string {
+    keyFn(node: string[]): string | null {
         return node[0];
     }
     depsFn(node: string[]): string[] {
