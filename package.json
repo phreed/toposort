@@ -8,7 +8,8 @@
     "dev-test-watch": "mocha-typescript-watch",
     "test": "tsc -p . && mocha --opts mocha.opts ",
     "test:auto": "tsc -p && mocha --opts mocha.opts --watch",
-    "prepublish": "tsc -p ."
+    "prepublish": "npm run build",
+    "build": "tsc -p . && browserify ./lib/toposort.js -s Topsort -o ./lib/toposort-browserify.js"
   },
   "license": "Apache-2.0",
   "homepage": "https://github.com/phreed/toposort",
