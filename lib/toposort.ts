@@ -66,7 +66,7 @@ export function ConstructAdjacencyList<T>(list: T[], methods: NodeMethods<T>): A
     let lookup = new Map<string, AdjacencyNode<T>>();
     list.forEach((node: T) => {
         let key = methods.keyFn(node);
-        if (key === "null") {
+        if (key === null) {
             return;
         }
         if (lookup.has(key)) {
